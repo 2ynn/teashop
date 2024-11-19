@@ -2,7 +2,7 @@ import teashop/command
 import teashop/event
 import teashop/internal/action
 
-pub opaque type App(model, msg, flags)
+pub type App(model, msg, flags)
 
 pub type Dispatch(msg) =
   fn(Action(msg)) -> Nil
@@ -23,7 +23,6 @@ pub fn start(
   app: App(model, msg, flags),
   flags: flags,
 ) -> fn(Action(msg)) -> Nil
-
 
 pub fn send(dispatch: Dispatch(msg), msg: msg) {
   dispatch(Action(action.Send(msg)))

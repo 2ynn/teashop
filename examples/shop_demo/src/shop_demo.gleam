@@ -1,9 +1,9 @@
-import teashop
-import teashop/event
-import teashop/command
-import teashop/key
-import gleam/string
 import gleam/list
+import gleam/string
+import teashop
+import teashop/command
+import teashop/event
+import teashop/key
 
 pub type Status {
   Selected
@@ -37,7 +37,7 @@ pub fn update(model: Model, event) {
         True -> choices_len - 1
         False -> model.cursor - 1
       }
-      #(Model(..model, cursor: cursor), command.noop())
+      #(Model(..model, cursor: cursor), command.none())
     }
 
     event.Key(key.Char("j")) | event.Key(key.Down) -> {
@@ -46,7 +46,7 @@ pub fn update(model: Model, event) {
         True -> 0
         False -> model.cursor + 1
       }
-      #(Model(..model, cursor: cursor), command.noop())
+      #(Model(..model, cursor: cursor), command.none())
     }
 
     event.Key(key.Enter) | event.Key(key.Space) -> {
@@ -65,9 +65,9 @@ pub fn update(model: Model, event) {
           }
           #(name, status)
         })
-      #(Model(..model, choices: choices), command.noop())
+      #(Model(..model, choices: choices), command.none())
     }
-    _otherwise -> #(model, command.noop())
+    _otherwise -> #(model, command.none())
   }
 }
 
